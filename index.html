@@ -1,0 +1,415 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Emerging Graphics — Print & Packaging Technology Solutions | emergeind.com</title>
+  <meta name="description" content="Emerging Graphics is an authorised distributor for EngView, Purvar, IECHO and KingT — delivering CAD/CAM software, digital cutting systems and pre-press solutions across India and the Middle East." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/nav.css" />
+  <link rel="stylesheet" href="assets/css/footer.css" />
+  <style>
+    /* ── Hero Slider ─────────────────────────────────────── */
+    .hero-slider { position: relative; height: 92vh; min-height: 560px; overflow: hidden; }
+    .slider-track { position: relative; width: 100%; height: 100%; }
+    .slide {
+      position: absolute; inset: 0;
+      display: flex; align-items: center;
+      opacity: 0; transition: opacity .7s ease;
+      background:
+        radial-gradient(560px circle at 14% -10%, rgba(232,116,10,.12), transparent 60%),
+        radial-gradient(480px circle at 86% 120%, rgba(61,140,104,.09), transparent 60%),
+        linear-gradient(135deg, #18160F 0%, #0F0E0A 100%);
+    }
+    .slide.active { opacity: 1; z-index: 1; }
+    .slide-bg {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+      opacity: .12;
+    }
+    .slide-content {
+      position: relative; z-index: 2;
+      max-width: var(--container); margin: 0 auto; padding: 0 24px;
+    }
+    .slide-tag {
+      display: inline-block; padding: 6px 16px;
+      background: transparent; color: var(--secondary);
+      border: 1px solid rgba(61,140,104,.45); border-radius: 100px;
+      font-size: .72rem; font-weight: 700; letter-spacing: .18em;
+      text-transform: uppercase; margin-bottom: 24px;
+    }
+    .slide-content h1 { color: var(--white); margin-bottom: 18px; max-width: 700px; }
+    .slide-content p  {
+      color: rgba(237,233,224,.5); font-size: 1.1rem;
+      max-width: 520px; margin-bottom: 32px;
+    }
+    .slide-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    /* Slider controls */
+    .slider-controls {
+      position: absolute; bottom: 36px; left: 50%;
+      transform: translateX(-50%); z-index: 10;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .slider-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(255,255,255,.4); cursor: pointer;
+      transition: background .2s, transform .2s; border: none;
+    }
+    .slider-dot.active { background: var(--accent); transform: scale(1.4); }
+    .slider-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      z-index: 10; background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.2); color: var(--white);
+      width: 44px; height: 44px; border-radius: 50%;
+      cursor: pointer; font-size: 1.1rem; display: flex;
+      align-items: center; justify-content: center;
+      transition: background .2s;
+    }
+    .slider-arrow:hover { background: var(--accent); border-color: var(--accent); }
+    .slider-prev { left: 24px; }
+    .slider-next { right: 24px; }
+
+    /* ── Who We Are ──────────────────────────────────────── */
+    .who-we-are .container { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .who-image { border-radius: 12px; overflow: hidden; background: var(--light); aspect-ratio: 4/3;
+      display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: .9rem; }
+    .who-actions { display: flex; gap: 14px; margin-top: 28px; flex-wrap: wrap; }
+
+    /* ── Product Category Cards ───────────────────────────── */
+    .category-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 36px 28px;
+      box-shadow: var(--shadow); transition: box-shadow .2s, transform .2s, border-color .2s;
+      text-align: center;
+    }
+    .category-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); border-color: rgba(232,116,10,.4); }
+    .category-icon {
+      width: 64px; height: 64px; border-radius: 16px;
+      background: rgba(61,140,104,.14); display: flex;
+      align-items: center; justify-content: center;
+      font-size: 1.8rem; margin: 0 auto 20px;
+    }
+    .category-card h3 { margin-bottom: 10px; }
+    .category-card p  { font-size: .9rem; margin-bottom: 20px; }
+    .category-card .products-list {
+      display: flex; flex-direction: column; gap: 6px;
+      margin-bottom: 24px; text-align: left;
+    }
+    .category-card .products-list li {
+      font-size: .85rem; color: var(--text-muted);
+      padding: 6px 10px; background: var(--light);
+      border-radius: 4px;
+    }
+
+    @media (max-width: 768px) {
+      .hero-slider { height: 75vh; min-height: 500px; }
+      .who-we-are .container { grid-template-columns: 1fr; }
+      .who-image { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Strip -->
+  <div class="top-strip">
+    <div class="container">
+      <span>📍 Dubai, UAE &amp; Navi Mumbai, India</span>
+      <a href="mailto:info@emergeind.com">✉ info@emergeind.com</a>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="site-nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/images/Logo-mark.png" alt="" onerror="this.style.display='none'" />
+        <span class="nav-wordmark"><span class="e">Emerging</span><span class="g">Graphics</span></span>
+      </a>
+      <button class="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li class="has-mega">
+          <a href="#">Products <span class="chevron">▾</span></a>
+          <div class="mega-menu">
+            <div class="mega-col-title">Our Solutions</div>
+            <div class="mega-col">
+              <div class="mega-col-label">Software</div>
+              <a href="products/engview.html">
+                <span class="mega-icon">📐</span>
+                <span><span class="mega-name">EngView</span><br><span class="mega-sub">CAD/CAM Packaging Design</span></span>
+              </a>
+              <a href="products/purvar-pasharp.html">
+                <span class="mega-icon">🖨</span>
+                <span><span class="mega-name">Purvar PaSharp</span><br><span class="mega-sub">Pre-press Suite</span></span>
+              </a>
+              <a href="products/purvar-linesharp.html">
+                <span class="mega-icon">✨</span>
+                <span><span class="mega-name">Purvar LineSharp</span><br><span class="mega-sub">Line Art Enhancement</span></span>
+              </a>
+            </div>
+            <div class="mega-col">
+              <div class="mega-col-label">Hardware</div>
+              <a href="products/kingt.html">
+                <span class="mega-icon">🏭</span>
+                <span><span class="mega-name">KingT Printers</span><br><span class="mega-sub">Digital Corrugation</span></span>
+              </a>
+              <a href="products/iecho.html">
+                <span class="mega-icon">✂️</span>
+                <span><span class="mega-name">IECHO Cutters</span><br><span class="mega-sub">Digital Cutting Systems</span></span>
+              </a>
+            </div>
+          </div>
+        </li>
+        <li class="nav-cta"><a href="contact.html">Contact Us</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Slider -->
+  <section class="hero-slider">
+    <div class="slider-track">
+
+      <div class="slide active">
+        <div class="slide-bg" style="background-image:url('assets/images/hero/hero-engview.jpg')"></div>
+        <div class="slide-content">
+          <div class="slide-tag">CAD/CAM Software</div>
+          <h1>EngView — Packaging Design Reimagined</h1>
+          <p>Parametric CAD/CAM software for structural packaging design — 3D visualisation, AR export and direct CNC output. Authorised for India and the Middle East.</p>
+          <div class="slide-actions">
+            <a href="products/engview.html" class="btn btn-primary">Learn More</a>
+            <a href="contact.html" class="btn btn-outline">Contact Us</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide">
+        <div class="slide-bg" style="background-image:url('assets/images/hero/hero-purvar.jpg')"></div>
+        <div class="slide-content">
+          <div class="slide-tag">Pre-press Solutions</div>
+          <h1>Purvar PaSharp & LineSharp</h1>
+          <p>Advanced pre-press software for precision plate making, colour separation and line art enhancement across all major printing workflows.</p>
+          <div class="slide-actions">
+            <a href="products/purvar-pasharp.html" class="btn btn-primary">Learn More</a>
+            <a href="contact.html" class="btn btn-outline">Contact Us</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide">
+        <div class="slide-bg" style="background-image:url('assets/images/hero/hero-iecho.jpg')"></div>
+        <div class="slide-content">
+          <div class="slide-tag">Digital Cutting</div>
+          <h1>IECHO Digital Cutting Systems</h1>
+          <p>9 versatile models — BK, PK, TK and more — for precision cutting of corrugated board, foam, leather, textiles and composite materials.</p>
+          <div class="slide-actions">
+            <a href="products/iecho.html" class="btn btn-primary">Explore Models</a>
+            <a href="contact.html" class="btn btn-outline">Contact Us</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide">
+        <div class="slide-bg" style="background-image:url('assets/images/hero/hero-kingt.jpg')"></div>
+        <div class="slide-content">
+          <div class="slide-tag">Digital Printing</div>
+          <h1>KingT Corrugation Printers</h1>
+          <p>Image-grade inkjet printing directly on corrugated board — no plates, no pre-coating. KGT-2500A+ for wide-format production.</p>
+          <div class="slide-actions">
+            <a href="products/kingt.html" class="btn btn-primary">See Models</a>
+            <a href="contact.html" class="btn btn-outline">Contact Us</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <button class="slider-arrow slider-prev" aria-label="Previous">&#8592;</button>
+    <button class="slider-arrow slider-next" aria-label="Next">&#8594;</button>
+    <div class="slider-controls">
+      <button class="slider-dot active" aria-label="Slide 1"></button>
+      <button class="slider-dot" aria-label="Slide 2"></button>
+      <button class="slider-dot" aria-label="Slide 3"></button>
+      <button class="slider-dot" aria-label="Slide 4"></button>
+    </div>
+  </section>
+
+  <!-- Stats Bar -->
+  <div class="stats-bar">
+    <div class="container">
+      <div class="stat-item">
+        <div class="number">20+</div>
+        <div class="label">Industry Experts</div>
+      </div>
+      <div class="stat-item">
+        <div class="number">3</div>
+        <div class="label">Countries Served</div>
+      </div>
+      <div class="stat-item">
+        <div class="number">30+</div>
+        <div class="label">Years of Experience</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Who We Are -->
+  <section class="who-we-are">
+    <div class="container">
+      <div>
+        <span class="eyebrow">About Us</span>
+        <h2>Empowering India's Print &amp; Packaging Industry</h2>
+        <p>Emerging Graphics Pvt. Ltd. is a Navi Mumbai-based authorised distributor and service partner for globally reputed print and packaging technology brands. From CAD/CAM software and pre-press solutions to digital cutting and corrugation printing, we bring world-class technology to converters across India.</p>
+        <p>With offices in Dubai, Navi Mumbai, Bengaluru and New Delhi, we provide end-to-end support including equipment installation, Annual Maintenance Contracts, technical consulting, operator training and spare parts supply.</p>
+        <div class="who-actions">
+          <a href="about.html" class="btn btn-secondary">View More</a>
+          <a href="contact.html" class="btn btn-primary">Contact Us</a>
+        </div>
+      </div>
+      <div class="who-image">
+        <img src="assets/images/about-office.jpg" alt="Emerging Graphics office" onerror="this.parentElement.innerHTML='<p style=\'padding:24px;text-align:center;color:var(--text-muted)\'>Company image coming soon</p>'" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Product Categories -->
+  <section class="light">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">Our Solutions</span>
+        <h2>Technology That Transforms Production</h2>
+        <p>We represent the best in class across software, hardware and services for the print and packaging industry.</p>
+      </div>
+      <div class="grid-3">
+        <div class="category-card">
+          <div class="category-icon">💻</div>
+          <h3>Software Solutions</h3>
+          <p>CAD/CAM design and pre-press software for structural packaging and plate making.</p>
+          <ul class="products-list">
+            <li>EngView — Packaging CAD/CAM</li>
+            <li>Purvar PaSharp — Pre-press</li>
+            <li>Purvar LineSharp — Line Art</li>
+          </ul>
+          <a href="products/engview.html" class="btn btn-secondary" style="font-size:.85rem;padding:9px 20px">Explore Software</a>
+        </div>
+        <div class="category-card">
+          <div class="category-icon" style="background:rgba(232,93,4,.10)">⚙️</div>
+          <h3>Hardware &amp; Cutting</h3>
+          <p>Digital cutting systems and corrugation printers for precision, speed and versatility.</p>
+          <ul class="products-list">
+            <li>IECHO Digital Cutting (9 models)</li>
+            <li>KingT Corrugation Printers</li>
+          </ul>
+          <a href="products/iecho.html" class="btn btn-secondary" style="font-size:.85rem;padding:9px 20px">Explore Hardware</a>
+        </div>
+        <div class="category-card">
+          <div class="category-icon" style="background:rgba(232,116,10,.12)">🔧</div>
+          <h3>After-Sales Services</h3>
+          <p>Comprehensive support to keep your operations running at peak performance.</p>
+          <ul class="products-list">
+            <li>Annual Maintenance Contracts</li>
+            <li>Installation &amp; Commissioning</li>
+            <li>Technical Consulting &amp; Training</li>
+          </ul>
+          <a href="contact.html" class="btn btn-secondary" style="font-size:.85rem;padding:9px 20px">Get in Touch</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Partner Logos -->
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">Our Partners</span>
+        <h2>Global Brands. Local Expertise.</h2>
+      </div>
+      <div class="partner-strip">
+        <img src="assets/images/partners/engview-Logo.svg" alt="EngView" onerror="this.outerHTML='<span style=\'font-weight:700;color:var(--text-muted);font-size:1.1rem\'>EngView</span>'" />
+        <img src="assets/images/partners/purvar-Logo.svg" alt="Purvar" onerror="this.outerHTML='<span style=\'font-weight:700;color:var(--text-muted);font-size:1.1rem\'>Purvar</span>'" />
+        <img src="assets/images/partners/iecho-Logo.svg" alt="IECHO" onerror="this.outerHTML='<span style=\'font-weight:700;color:var(--text-muted);font-size:1.1rem\'>IECHO</span>'" />
+        <img src="assets/images/partners/kingt-Logo.svg" alt="KingT" onerror="this.outerHTML='<span style=\'font-weight:700;color:var(--text-muted);font-size:1.1rem\'>KingT</span>'" />
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Band -->
+  <div class="cta-band">
+    <div class="container">
+      <h2>Ready to transform your print &amp; packaging workflow?</h2>
+      <p>Talk to our experts and find the right solution for your business.</p>
+      <a href="contact.html" class="btn btn-outline" style="border-color:white;color:white;font-size:1rem;padding:14px 32px">Get in Touch</a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="footer-logo" href="index.html"><img src="assets/images/Logo-mark.png" alt="" onerror="this.style.display='none'" /><span class="footer-wordmark"><span class="e">Emerging</span><span class="g">Graphics</span></span></a>
+          <p class="tagline">Authorised distributor &amp; service partner for world-class print and packaging technology across India and the Middle East.</p>
+          <div class="footer-social">
+            <a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h5>Products</h5>
+          <ul>
+            <li><a href="products/engview.html">EngView</a></li>
+            <li><a href="products/purvar-pasharp.html">Purvar PaSharp</a></li>
+            <li><a href="products/purvar-linesharp.html">Purvar LineSharp</a></li>
+            <li><a href="products/kingt.html">KingT Printers</a></li>
+            <li><a href="products/iecho.html">IECHO Cutters</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Company</h5>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Our Offices</h5>
+          <div class="footer-offices">
+            <div class="footer-office">
+              <span class="flag">🇦🇪</span>
+              <address><strong>Dubai, UAE</strong>Head Office</address>
+            </div>
+            <div class="footer-office">
+              <span class="flag">🇮🇳</span>
+              <address><strong>Navi Mumbai</strong>D370A, TTC MIDC, Jui Nagar — 400705</address>
+            </div>
+            <div class="footer-office">
+              <span class="flag">🇮🇳</span>
+              <address><strong>Bengaluru</strong>Regional Office</address>
+            </div>
+            <div class="footer-office">
+              <span class="flag">🇮🇳</span>
+              <address><strong>New Delhi</strong>Regional Office</address>
+            </div>
+          </div>
+          <div class="footer-contact-info">
+            <a href="tel:+919819621570">📞 +91 98196 21570</a>
+            <a href="mailto:info@emergeind.com">✉ info@emergeind.com</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Emerging Graphics Pvt. Ltd. All rights reserved.</span>
+        <span>Website by <a href="https://techfirst.in" style="color:rgba(255,255,255,.5)">TechFirst Software Solutions</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/slider.js"></script>
+</body>
+</html>

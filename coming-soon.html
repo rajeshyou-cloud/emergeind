@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EmergeInd — Coming Soon</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #0a0a0f;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    /* animated gradient orbs */
+    body::before, body::after {
+      content: '';
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.35;
+      animation: drift 12s ease-in-out infinite alternate;
+    }
+    body::before {
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, #6c3fff, #2a0a6e);
+      top: -200px; left: -200px;
+    }
+    body::after {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, #ff6b35, #c9243f);
+      bottom: -150px; right: -150px;
+      animation-delay: -6s;
+    }
+    @keyframes drift {
+      from { transform: translate(0, 0) scale(1); }
+      to   { transform: translate(60px, 40px) scale(1.12); }
+    }
+
+    .card {
+      position: relative;
+      text-align: center;
+      padding: 64px 48px;
+      max-width: 600px;
+      width: 90%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 24px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 32px 80px rgba(0,0,0,0.5);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 18px;
+      background: linear-gradient(135deg, #6c3fff33, #ff6b3533);
+      border: 1px solid rgba(108,63,255,0.4);
+      border-radius: 100px;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #b39dff;
+      margin-bottom: 32px;
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 6vw, 3.8rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.1;
+      background: linear-gradient(135deg, #fff 30%, #b39dff 70%, #ff9f6b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 20px;
+    }
+
+    .tagline {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.7;
+      max-width: 420px;
+      margin: 0 auto 48px;
+    }
+
+    .divider {
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, #6c3fff, #ff6b35);
+      border-radius: 2px;
+      margin: 0 auto 48px;
+    }
+
+    .notify-label {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .notify-form {
+      display: flex;
+      gap: 12px;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    .notify-form input {
+      flex: 1;
+      padding: 14px 18px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px;
+      color: #fff;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .notify-form input::placeholder { color: rgba(255,255,255,0.3); }
+    .notify-form input:focus { border-color: #6c3fff; }
+    .notify-form button {
+      padding: 14px 24px;
+      background: linear-gradient(135deg, #6c3fff, #9b6dff);
+      border: none;
+      border-radius: 12px;
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: opacity 0.2s, transform 0.1s;
+    }
+    .notify-form button:hover { opacity: 0.88; }
+    .notify-form button:active { transform: scale(0.97); }
+
+    .footer {
+      margin-top: 48px;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.2);
+      letter-spacing: 0.5px;
+    }
+
+    @media (max-width: 480px) {
+      .card { padding: 48px 28px; }
+      .notify-form { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="badge">&#9679; Something exciting is coming</div>
+    <h1>EmergeInd</h1>
+    <p class="tagline">We're crafting something remarkable. Our website is on its way — stay tuned for the big reveal.</p>
+    <div class="divider"></div>
+    <p class="notify-label">Get notified when we launch</p>
+    <form class="notify-form" onsubmit="handleSubmit(event)">
+      <input type="email" placeholder="your@email.com" required />
+      <button type="submit">Notify me</button>
+    </form>
+    <p class="footer" id="msg"></p>
+    <p class="footer" style="margin-top:32px">&copy; 2026 EmergeInd. All rights reserved.</p>
+  </div>
+
+  <script>
+    function handleSubmit(e) {
+      e.preventDefault();
+      document.getElementById('msg').textContent = '✓ You\'re on the list! We\'ll be in touch soon.';
+      e.target.reset();
+    }
+  </script>
+</body>
+</html>

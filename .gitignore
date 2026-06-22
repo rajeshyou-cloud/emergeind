@@ -1,0 +1,6 @@
+*.docx
+*.ai
+*.zip
+docs/
+*EmergeInd_rfp_dump.txt
+.claude/
