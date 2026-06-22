@@ -1,0 +1,600 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design Options — emergeind.com</title>
+<style>
+/* ── PRESENTER LAYER ─────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,sans-serif;background:#ECEDF2;color:#1A1A2E;min-height:100vh}
+
+.p-header{background:white;padding:24px 40px 20px;border-bottom:1px solid #D1D5DB;display:flex;align-items:center;justify-content:space-between}
+.p-header h1{font-size:1rem;font-weight:700;letter-spacing:-0.01em}
+.p-header p{font-size:0.78rem;color:#6B7280;margin-top:2px}
+.p-badge{font-size:0.7rem;background:#F3F4F6;color:#6B7280;padding:4px 10px;border-radius:4px;font-weight:500}
+
+.p-tabs{background:white;border-bottom:1px solid #D1D5DB;padding:0 40px;display:flex;gap:2px;overflow-x:auto}
+.tab-btn{padding:14px 20px;border:none;border-bottom:2.5px solid transparent;background:transparent;font-size:0.82rem;font-weight:600;color:#6B7280;cursor:pointer;white-space:nowrap;transition:all .15s;font-family:inherit;display:flex;align-items:center;gap:8px}
+.tab-btn:hover{color:#1A1A2E}
+.tab-btn.active{color:#1A1A2E;border-bottom-color:#1A1A2E}
+.tab-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+
+.p-body{padding:28px 40px;max-width:1280px;margin:0 auto}
+
+.concept-panel{display:none}
+.concept-panel.active{display:block}
+
+/* Browser chrome */
+.browser{background:#E5E7EB;border-radius:10px 10px 0 0;padding:10px 16px;display:flex;align-items:center;gap:12px}
+.browser-dots{display:flex;gap:6px}
+.browser-dots span{width:11px;height:11px;border-radius:50%}
+.browser-dots span:nth-child(1){background:#FC5F57}
+.browser-dots span:nth-child(2){background:#FEBC2E}
+.browser-dots span:nth-child(3){background:#27C93F}
+.browser-bar{flex:1;background:white;border-radius:4px;padding:4px 12px;font-size:0.72rem;color:#9CA3AF;font-family:'Courier New',monospace}
+
+.site-preview{height:540px;overflow-y:auto;border:1px solid #D1D5DB;border-top:none;border-radius:0 0 10px 10px}
+
+/* Design notes */
+.design-notes{margin-top:16px;display:grid;grid-template-columns:200px 1fr 1fr;gap:0;background:white;border:1px solid #D1D5DB;border-radius:10px;overflow:hidden}
+.dn-col{padding:20px 24px;border-right:1px solid #E5E7EB}
+.dn-col:last-child{border-right:none}
+.dn-label{font-size:0.65rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#9CA3AF;margin-bottom:12px}
+.palette-row{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+.chip{width:22px;height:22px;border-radius:5px;border:1px solid rgba(0,0,0,.1);flex-shrink:0}
+.chip-hex{font-size:0.68rem;font-family:'Courier New',monospace;color:#6B7280}
+.type-display{font-size:1.4rem;line-height:1.2;margin-bottom:6px;color:#1A1A2E}
+.type-body{font-size:0.78rem;color:#6B7280;line-height:1.5}
+.dn-list{list-style:none}
+.dn-list li{font-size:0.78rem;color:#374151;padding:3px 0 3px 14px;position:relative;line-height:1.5}
+.dn-list li::before{content:'→';position:absolute;left:0;color:#9CA3AF;font-size:0.7rem;top:5px}
+.dn-list li strong{color:#1A1A2E;font-weight:600}
+
+/* ── CONCEPT A: CURRENT REFINED ─────────────────────── */
+.ca-nav{background:#1A2E4A;padding:0 40px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10}
+.ca-logo{color:white;font-weight:800;font-size:0.92rem;letter-spacing:-0.01em}
+.ca-links{display:flex;gap:24px;list-style:none}
+.ca-links a{color:rgba(255,255,255,.65);font-size:0.82rem;text-decoration:none}
+.ca-cta-lnk{background:#E85D04;color:white!important;padding:7px 16px;border-radius:6px;font-weight:700!important}
+
+.ca-hero{background:linear-gradient(130deg,#1A2E4A 55%,#0F1E32 100%);min-height:360px;display:flex;align-items:center;padding:72px 40px;position:relative;overflow:hidden}
+.ca-hero::before{content:'';position:absolute;right:0;top:0;bottom:0;width:42%;background:linear-gradient(135deg,transparent,rgba(232,93,4,.18));clip-path:polygon(18% 0,100% 0,100% 100%,0% 100%)}
+.ca-hero::after{content:'';position:absolute;right:80px;top:50px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(232,93,4,.22),transparent 70%)}
+.ca-hero-inner{position:relative;z-index:1;max-width:560px}
+.ca-eyebrow{font-size:0.7rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#E85D04;margin-bottom:16px}
+.ca-h1{font-size:2.8rem;font-weight:800;color:white;line-height:1.1;letter-spacing:-0.02em;margin-bottom:18px}
+.ca-h1 em{color:#E85D04;font-style:normal}
+.ca-sub{color:rgba(255,255,255,.62);font-size:0.92rem;line-height:1.65;margin-bottom:28px}
+.ca-btns{display:flex;gap:12px}
+.ca-bp{background:#E85D04;color:white;padding:11px 22px;border-radius:7px;font-size:0.84rem;font-weight:700;text-decoration:none}
+.ca-bo{border:1.5px solid rgba(255,255,255,.28);color:rgba(255,255,255,.82);padding:11px 22px;border-radius:7px;font-size:0.84rem;font-weight:600;text-decoration:none}
+
+.ca-stats{background:#E85D04;display:flex}
+.ca-stat{flex:1;padding:22px 28px;text-align:center;border-right:1px solid rgba(255,255,255,.2)}
+.ca-stat:last-child{border-right:none}
+.ca-num{font-size:2rem;font-weight:800;color:white;line-height:1}
+.ca-lbl{font-size:0.74rem;color:rgba(255,255,255,.8);margin-top:4px}
+
+.ca-section{background:#F4F6F8;padding:44px 40px}
+.ca-sec-label{font-size:0.68rem;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:#E85D04;margin-bottom:8px}
+.ca-sec-h2{font-size:1.45rem;font-weight:700;color:#1A2E4A;margin-bottom:26px}
+.ca-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.ca-card{background:white;border-radius:9px;padding:22px;border:1px solid #E2E8F0;border-top:3px solid #E85D04}
+.ca-card-icon{font-size:1.3rem;margin-bottom:10px}
+.ca-card-title{font-size:0.88rem;font-weight:700;color:#1A2E4A;margin-bottom:7px}
+.ca-card-desc{font-size:0.78rem;color:#64748B;line-height:1.55;margin:0}
+.ca-card-link{font-size:0.76rem;color:#E85D04;font-weight:700;margin-top:10px;display:block;text-decoration:none}
+
+.ca-cta{background:#1A2E4A;padding:44px 40px;text-align:center}
+.ca-cta h2{color:white;font-size:1.45rem;font-weight:700;margin-bottom:10px}
+.ca-cta p{color:rgba(255,255,255,.55);font-size:0.86rem;margin-bottom:22px}
+.ca-cta-btn{background:#E85D04;color:white;padding:11px 28px;border-radius:7px;font-size:0.86rem;font-weight:700;text-decoration:none;display:inline-block}
+
+/* ── CONCEPT B: DIE LINE ─────────────────────────────── */
+.cb-nav{background:#F2EFE7;border-bottom:1px solid rgba(200,0,10,.22);padding:0 40px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10}
+.cb-logo{color:#1C1826;font-family:Georgia,serif;font-weight:700;font-size:1rem;font-style:italic}
+.cb-links{display:flex;gap:24px;list-style:none}
+.cb-links a{color:#4A4455;font-size:0.82rem;text-decoration:none}
+.cb-cta-lnk{color:#C8000A!important;font-weight:700!important;border-bottom:1.5px solid #C8000A;padding-bottom:1px}
+
+.cb-hero{background:#F2EFE7;min-height:360px;display:flex;align-items:center;padding:72px 40px;position:relative;overflow:hidden}
+.cb-hero::before{content:'';position:absolute;top:18px;left:18px;width:calc(100% - 36px);height:calc(100% - 36px);border:1.5px dashed rgba(200,0,10,.32);pointer-events:none}
+.cb-reg{position:absolute;top:24px;right:44px;font-size:1.3rem;color:rgba(200,0,10,.38);line-height:1;font-family:'Courier New',monospace;user-select:none}
+.cb-reg2{position:absolute;bottom:24px;left:44px;font-size:1.3rem;color:rgba(200,0,10,.28);line-height:1;font-family:'Courier New',monospace;user-select:none}
+.cb-hero-inner{position:relative;z-index:1;max-width:620px}
+.cb-eyebrow{font-size:0.68rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#2D4B8E;margin-bottom:20px;font-family:'Courier New',monospace}
+.cb-h1{font-family:Georgia,serif;font-size:3.2rem;font-weight:700;color:#1C1826;line-height:1.1;letter-spacing:-0.01em;margin-bottom:0}
+.cb-h1 em{color:#C8000A}
+.cb-sub{color:#4A4455;font-size:0.92rem;line-height:1.68;margin-bottom:32px;margin-top:18px;max-width:500px}
+.cb-btns{display:flex;gap:20px;align-items:center}
+.cb-bp{background:#C8000A;color:white;padding:11px 24px;font-size:0.84rem;font-weight:700;text-decoration:none;letter-spacing:0.02em}
+.cb-bo{color:#2D4B8E;font-size:0.84rem;font-weight:600;text-decoration:none;border-bottom:1.5px solid #2D4B8E;padding-bottom:2px}
+
+.cb-stats{background:#1C1826;display:flex}
+.cb-stat{flex:1;padding:24px 28px;text-align:center;border-right:1px solid rgba(255,255,255,.07)}
+.cb-stat:last-child{border-right:none}
+.cb-num{font-family:Georgia,serif;font-size:2.1rem;font-weight:700;color:#C8000A;line-height:1}
+.cb-lbl{font-size:0.68rem;color:rgba(255,255,255,.45);margin-top:6px;letter-spacing:0.1em;text-transform:uppercase;font-family:'Courier New',monospace}
+
+.cb-section{background:#F2EFE7;padding:44px 40px}
+.cb-sec-label{font-family:'Courier New',monospace;font-size:0.66rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:#2D4B8E;margin-bottom:10px}
+.cb-sec-h2{font-family:Georgia,serif;font-size:1.6rem;font-weight:700;color:#1C1826;margin-bottom:28px}
+.cb-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.cb-card{background:white;border:1px solid rgba(200,0,10,.22);padding:22px;position:relative}
+.cb-card::before{content:'';position:absolute;top:5px;left:5px;right:5px;bottom:5px;border:1px dashed rgba(200,0,10,.14);pointer-events:none}
+.cb-card-ref{font-family:'Courier New',monospace;font-size:0.62rem;color:rgba(200,0,10,.45);margin-bottom:10px}
+.cb-card-title{font-family:Georgia,serif;font-size:0.94rem;font-weight:700;color:#1C1826;margin-bottom:8px}
+.cb-card-desc{font-size:0.78rem;color:#4A4455;line-height:1.55;margin:0}
+.cb-card-link{font-size:0.76rem;color:#C8000A;font-weight:700;margin-top:12px;display:block;text-decoration:none;letter-spacing:0.03em}
+
+.cb-cta{background:#2D4B8E;padding:52px 40px;text-align:center}
+.cb-cta h2{font-family:Georgia,serif;font-style:italic;color:white;font-size:1.7rem;margin-bottom:12px}
+.cb-cta p{color:rgba(255,255,255,.6);font-size:0.86rem;margin-bottom:24px}
+.cb-cta-btn{border:1.5px solid rgba(255,255,255,.55);color:white;padding:11px 28px;font-size:0.86rem;font-weight:600;text-decoration:none;display:inline-block;letter-spacing:0.04em}
+
+/* ── CONCEPT C: DARK SUBSTRATE ───────────────────────── */
+.cc-nav{background:#18160F;border-bottom:1px solid rgba(232,116,10,.18);padding:0 40px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10}
+.cc-logo{color:#EDE9E0;font-weight:800;font-size:0.82rem;letter-spacing:0.1em;text-transform:uppercase}
+.cc-links{display:flex;gap:24px;list-style:none}
+.cc-links a{color:rgba(237,233,224,.4);font-size:0.7rem;text-decoration:none;letter-spacing:0.08em;text-transform:uppercase;font-weight:600}
+.cc-cta-lnk{color:#E8740A!important}
+
+.cc-hero{background:#18160F;min-height:380px;display:flex;align-items:center;padding:80px 40px;position:relative;overflow:hidden}
+.cc-hero::before{content:'';position:absolute;left:-80px;top:-80px;width:350px;height:350px;background:radial-gradient(circle,rgba(232,116,10,.1),transparent 70%);border-radius:50%}
+.cc-hero::after{content:'';position:absolute;right:60px;bottom:-60px;width:260px;height:260px;background:radial-gradient(circle,rgba(61,140,104,.07),transparent 70%);border-radius:50%}
+.cc-hero-inner{position:relative;z-index:1;max-width:640px}
+.cc-eyebrow{font-size:0.65rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:#3D8C68;margin-bottom:22px}
+.cc-h1{font-size:3.4rem;font-weight:800;color:#EDE9E0;line-height:1.05;letter-spacing:-0.01em;text-transform:uppercase;margin-bottom:0}
+.cc-h1 em{color:#E8740A;font-style:normal}
+.cc-sub{color:rgba(237,233,224,.42);font-size:0.9rem;line-height:1.72;margin-bottom:36px;margin-top:20px}
+.cc-btns{display:flex;gap:12px}
+.cc-bp{background:#E8740A;color:#18160F;padding:12px 24px;font-size:0.82rem;font-weight:800;text-decoration:none;letter-spacing:0.05em;text-transform:uppercase}
+.cc-bo{border:1px solid rgba(237,233,224,.18);color:rgba(237,233,224,.6);padding:12px 24px;font-size:0.82rem;font-weight:600;text-decoration:none;text-transform:uppercase;letter-spacing:0.05em}
+
+.cc-stats{background:#0F0E0A;display:flex;border-top:1px solid rgba(232,116,10,.18);border-bottom:1px solid rgba(232,116,10,.18)}
+.cc-stat{flex:1;padding:28px 32px;text-align:center;border-right:1px solid rgba(255,255,255,.04)}
+.cc-stat:last-child{border-right:none}
+.cc-num{font-size:2.8rem;font-weight:800;color:#E8740A;line-height:1;letter-spacing:-0.02em}
+.cc-lbl{font-size:0.64rem;color:rgba(237,233,224,.3);margin-top:6px;letter-spacing:0.16em;text-transform:uppercase}
+
+.cc-section{background:#18160F;padding:44px 40px}
+.cc-sec-label{font-size:0.62rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#3D8C68;margin-bottom:10px}
+.cc-sec-h2{font-size:1.4rem;font-weight:800;color:#EDE9E0;margin-bottom:28px;letter-spacing:-0.01em;text-transform:uppercase}
+.cc-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(232,116,10,.2)}
+.cc-card{background:#1E1C14;padding:24px}
+.cc-card-icon{font-size:1.1rem;margin-bottom:12px;opacity:.65}
+.cc-card-title{font-size:0.8rem;font-weight:800;color:#EDE9E0;margin-bottom:8px;letter-spacing:0.06em;text-transform:uppercase}
+.cc-card-desc{font-size:0.76rem;color:rgba(237,233,224,.38);line-height:1.6;margin:0}
+.cc-card-link{font-size:0.72rem;color:#E8740A;font-weight:700;margin-top:12px;display:block;text-decoration:none;letter-spacing:0.07em;text-transform:uppercase}
+
+.cc-cta{background:#0F0E0A;padding:60px 40px;text-align:center;border-top:1px solid rgba(232,116,10,.18)}
+.cc-cta h2{color:#EDE9E0;font-size:1.5rem;font-weight:800;text-transform:uppercase;letter-spacing:-0.01em;margin-bottom:12px}
+.cc-cta p{color:rgba(237,233,224,.32);font-size:0.86rem;margin-bottom:28px}
+.cc-cta-btn{background:#E8740A;color:#0F0E0A;padding:13px 32px;font-size:0.82rem;font-weight:800;text-decoration:none;display:inline-block;letter-spacing:0.07em;text-transform:uppercase}
+
+/* ── CONCEPT D: CLARITY ──────────────────────────────── */
+.cd-nav{background:#FAFAFA;border-bottom:1px solid #E8E8EE;padding:0 40px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10}
+.cd-logo{color:#0D0D12;font-weight:700;font-size:0.9rem;letter-spacing:-0.02em}
+.cd-logo span{color:#0047E1}
+.cd-links{display:flex;gap:28px;list-style:none}
+.cd-links a{color:#6B7280;font-size:0.82rem;text-decoration:none}
+.cd-cta-lnk{background:#0047E1;color:white!important;padding:7px 16px;font-size:0.8rem;font-weight:600!important}
+
+.cd-hero{background:#FAFAFA;min-height:380px;display:flex;align-items:stretch}
+.cd-hero-left{width:200px;flex-shrink:0;background:#0047E1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;text-align:center}
+.cd-bignum{font-size:4.5rem;font-weight:300;color:white;line-height:1;letter-spacing:-0.04em}
+.cd-numsup{font-size:2rem;font-weight:300;vertical-align:super;color:white}
+.cd-numlabel{font-size:0.65rem;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:0.14em;margin-top:10px;line-height:1.4}
+.cd-hero-right{flex:1;padding:64px 44px;display:flex;flex-direction:column;justify-content:center}
+.cd-eyebrow{font-size:0.68rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#9CA3AF;margin-bottom:20px}
+.cd-h1{font-size:2.3rem;font-weight:300;color:#0D0D12;line-height:1.22;letter-spacing:-0.03em;margin-bottom:0}
+.cd-h1 strong{font-weight:800}
+.cd-rule{width:44px;height:2px;background:#0047E1;margin:20px 0}
+.cd-sub{color:#6B7280;font-size:0.88rem;line-height:1.72;margin-bottom:28px;max-width:420px}
+.cd-btns{display:flex;gap:16px;align-items:center}
+.cd-bp{background:#0047E1;color:white;padding:11px 24px;font-size:0.84rem;font-weight:600;text-decoration:none}
+.cd-bo{color:#6B7280;font-size:0.84rem;text-decoration:none;border-bottom:1px solid #D1D5DB;padding-bottom:2px}
+
+.cd-stats{background:white;border-top:1px solid #E8E8EE;border-bottom:1px solid #E8E8EE;display:flex}
+.cd-stat{flex:1;padding:26px 32px;border-right:1px solid #E8E8EE}
+.cd-stat:last-child{border-right:none}
+.cd-num{font-size:2.1rem;font-weight:700;color:#0D0D12;line-height:1;letter-spacing:-0.03em}
+.cd-num em{color:#0047E1;font-style:normal}
+.cd-lbl{font-size:0.74rem;color:#6B7280;margin-top:6px}
+
+.cd-section{background:#FAFAFA;padding:44px 40px}
+.cd-sec-label{font-size:0.68rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#9CA3AF;margin-bottom:8px}
+.cd-sec-h2{font-size:1.45rem;font-weight:300;color:#0D0D12;margin-bottom:28px;letter-spacing:-0.02em}
+.cd-sec-h2 strong{font-weight:700}
+.cd-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid #E8E8EE}
+.cd-card{padding:24px;border-right:1px solid #E8E8EE;border-bottom:1px solid #E8E8EE;border-left:3px solid transparent;transition:border-left-color .15s}
+.cd-card:hover{border-left-color:#0047E1}
+.cd-card:nth-child(2){border-right:none}
+.cd-card:nth-child(3),.cd-card:nth-child(4){border-bottom:none}
+.cd-card-icon{font-size:1.1rem;margin-bottom:12px}
+.cd-card-title{font-size:0.86rem;font-weight:700;color:#0D0D12;margin-bottom:8px}
+.cd-card-desc{font-size:0.78rem;color:#6B7280;line-height:1.55;margin:0}
+.cd-card-link{font-size:0.76rem;color:#0047E1;font-weight:600;margin-top:10px;display:block;text-decoration:none}
+
+.cd-cta{background:#0047E1;padding:60px 40px;text-align:center}
+.cd-cta h2{font-size:1.5rem;font-weight:300;color:white;letter-spacing:-0.02em;margin-bottom:12px}
+.cd-cta h2 strong{font-weight:800}
+.cd-cta p{color:rgba(255,255,255,.6);font-size:0.86rem;margin-bottom:26px}
+.cd-cta-btn{background:white;color:#0047E1;padding:12px 32px;font-size:0.86rem;font-weight:700;text-decoration:none;display:inline-block}
+
+.ca-logo,.cb-logo,.cc-logo,.cd-logo{display:inline-flex;align-items:center;gap:9px}
+.opt-mark{height:32px;width:auto;display:block}
+</style>
+</head>
+<body>
+
+<div class="p-header">
+  <div>
+    <h1>Design Options — emergeind.com</h1>
+    <p>4 distinct directions. Click a tab to switch. Scroll inside each preview.</p>
+  </div>
+  <span class="p-badge">TechFirst × Emerging Graphics · 2026</span>
+</div>
+
+<div class="p-tabs">
+  <button class="tab-btn active" id="tab-a" onclick="show('a')">
+    <span class="tab-dot" style="background:#1A2E4A"></span> A — Current Refined
+  </button>
+  <button class="tab-btn" id="tab-b" onclick="show('b')">
+    <span class="tab-dot" style="background:#C8000A"></span> B — Die Line
+  </button>
+  <button class="tab-btn" id="tab-c" onclick="show('c')">
+    <span class="tab-dot" style="background:#E8740A"></span> C — Dark Substrate
+  </button>
+  <button class="tab-btn" id="tab-d" onclick="show('d')">
+    <span class="tab-dot" style="background:#0047E1"></span> D — Clarity
+  </button>
+</div>
+
+<div class="p-body">
+
+<!-- ──────────────────────────── CONCEPT A ──────────────── -->
+<div class="concept-panel active" id="panel-a">
+  <div class="browser">
+    <div class="browser-dots"><span></span><span></span><span></span></div>
+    <div class="browser-bar">emergeind.com</div>
+  </div>
+  <div class="site-preview">
+    <nav class="ca-nav">
+      <span class="ca-logo"><img class="opt-mark" src="../assets/images/Logo-mark.png" alt="">EMERGING GRAPHICS</span>
+      <ul class="ca-links">
+        <li><a href="#">Home</a></li><li><a href="#">About Us</a></li>
+        <li><a href="#">Products ▾</a></li>
+        <li><a href="#" class="ca-cta-lnk">Contact Us</a></li>
+      </ul>
+    </nav>
+    <div class="ca-hero">
+      <div class="ca-hero-inner">
+        <div class="ca-eyebrow">Authorised distributor — India &amp; Middle East</div>
+        <h1 class="ca-h1">Print. Package. <em>Lead.</em></h1>
+        <p class="ca-sub">World-class packaging technology — EngView, Purvar, IECHO and KingT — backed by 30 years of field expertise and pan-India after-sales service.</p>
+        <div class="ca-btns">
+          <a href="#" class="ca-bp">Explore Products →</a>
+          <a href="#" class="ca-bo">Get in Touch</a>
+        </div>
+      </div>
+    </div>
+    <div class="ca-stats">
+      <div class="ca-stat"><div class="ca-num">30+</div><div class="ca-lbl">Years of expertise</div></div>
+      <div class="ca-stat"><div class="ca-num">500+</div><div class="ca-lbl">Installations across India</div></div>
+      <div class="ca-stat"><div class="ca-num">3</div><div class="ca-lbl">Countries served</div></div>
+    </div>
+    <div class="ca-section">
+      <div class="ca-sec-label">Our Products</div>
+      <div class="ca-sec-h2">Technology for the Modern Packaging Plant</div>
+      <div class="ca-grid">
+        <div class="ca-card">
+          <div class="ca-card-icon">📐</div>
+          <div class="ca-card-title">EngView — CAD/CAM Design</div>
+          <p class="ca-card-desc">Structural design and 3D visualisation for packaging engineers. 1,500+ industry die templates. FEFCO/ECMA compliant.</p>
+          <a href="#" class="ca-card-link">View Product →</a>
+        </div>
+        <div class="ca-card">
+          <div class="ca-card-icon">✂️</div>
+          <div class="ca-card-title">IECHO — Digital Cutting Systems</div>
+          <p class="ca-card-desc">9-model range covering corrugated, carton, foam and flexible packaging. Precision to ±0.1 mm at speeds to 2,200 mm/s.</p>
+          <a href="#" class="ca-card-link">View Product →</a>
+        </div>
+      </div>
+    </div>
+    <div class="ca-cta">
+      <h2>Ready to modernise your packaging workflow?</h2>
+      <p>Talk to our team about which technology fits your production line.</p>
+      <a href="#" class="ca-cta-btn">Contact Us →</a>
+    </div>
+  </div>
+
+  <div class="design-notes">
+    <div class="dn-col">
+      <div class="dn-label">Palette</div>
+      <div class="palette-row"><div class="chip" style="background:#1A2E4A"></div><span class="chip-hex">#1A2E4A</span></div>
+      <div class="palette-row"><div class="chip" style="background:#E85D04"></div><span class="chip-hex">#E85D04</span></div>
+      <div class="palette-row"><div class="chip" style="background:#0077B6"></div><span class="chip-hex">#0077B6</span></div>
+      <div class="palette-row"><div class="chip" style="background:#F4F6F8;border:1px solid #ddd"></div><span class="chip-hex">#F4F6F8</span></div>
+    </div>
+    <div class="dn-col">
+      <div class="dn-label">Typography</div>
+      <div class="type-display" style="font-weight:800;letter-spacing:-0.02em;color:#1A2E4A">Print. Package. Lead.</div>
+      <div class="type-body">system-ui / Inter · 800w display · −0.02em tracking<br>Same typeface, tighter execution</div>
+    </div>
+    <div class="dn-col">
+      <div class="dn-label">What changed vs. current</div>
+      <ul class="dn-list">
+        <li><strong>Orange stats band</strong> — more energetic than navy, keeps orange as the hero's accent</li>
+        <li><strong>Border-top accent on cards</strong> — 3px orange top border ties cards back to the palette</li>
+        <li><strong>Diagonal hero clip-path</strong> — warm glow on right half, replaces flat gradient</li>
+        <li>Safest choice — same identity, better execution</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ──────────────────────────── CONCEPT B ──────────────── -->
+<div class="concept-panel" id="panel-b">
+  <div class="browser">
+    <div class="browser-dots"><span></span><span></span><span></span></div>
+    <div class="browser-bar">emergeind.com</div>
+  </div>
+  <div class="site-preview">
+    <nav class="cb-nav">
+      <span class="cb-logo"><img class="opt-mark" src="../assets/images/Logo-mark-color.png" alt="">Emerging Graphics</span>
+      <ul class="cb-links">
+        <li><a href="#">Home</a></li><li><a href="#">About</a></li>
+        <li><a href="#">Products</a></li>
+        <li><a href="#" class="cb-cta-lnk">Enquire</a></li>
+      </ul>
+    </nav>
+    <div class="cb-hero">
+      <span class="cb-reg">⊕</span>
+      <span class="cb-reg2">⊕</span>
+      <div class="cb-hero-inner">
+        <div class="cb-eyebrow">REF: EGI-IND-2026 &nbsp;/&nbsp; Authorised distributor &amp; service partner</div>
+        <h1 class="cb-h1">Precision starts<br>before the <em>print.</em></h1>
+        <p class="cb-sub">Emerging Graphics brings the tools that define packaging quality — EngView structural design, Purvar pre-press, IECHO digital cutting, KingT corrugation printing — to manufacturers across India and the Middle East.</p>
+        <div class="cb-btns">
+          <a href="#" class="cb-bp">View Products</a>
+          <a href="#" class="cb-bo">Get in touch →</a>
+        </div>
+      </div>
+    </div>
+    <div class="cb-stats">
+      <div class="cb-stat"><div class="cb-num">30+</div><div class="cb-lbl">YEARS SERVED</div></div>
+      <div class="cb-stat"><div class="cb-num">500+</div><div class="cb-lbl">INSTALLATIONS</div></div>
+      <div class="cb-stat"><div class="cb-num">4</div><div class="cb-lbl">TECHNOLOGY BRANDS</div></div>
+    </div>
+    <div class="cb-section">
+      <div class="cb-sec-label">PRODUCT LINE / 2026</div>
+      <div class="cb-sec-h2">The Technology We Represent</div>
+      <div class="cb-grid">
+        <div class="cb-card">
+          <div class="cb-card-ref">EGI-SW-001 / EngView Systems, Bulgaria</div>
+          <div class="cb-card-title">EngView CAD/CAM Software</div>
+          <p class="cb-card-desc">Structural design, 3D visualisation and costing for packaging engineers. The industry standard in structural packaging design — 1,500+ die templates.</p>
+          <a href="#" class="cb-card-link">Product Specification →</a>
+        </div>
+        <div class="cb-card">
+          <div class="cb-card-ref">EGI-HW-004 / IECHO Systems, China</div>
+          <div class="cb-card-title">IECHO Digital Cutting Systems</div>
+          <p class="cb-card-desc">Nine cutting system models for corrugated, carton board, foam and flexible substrates. Precision to ±0.1 mm at production speeds.</p>
+          <a href="#" class="cb-card-link">Product Specification →</a>
+        </div>
+      </div>
+    </div>
+    <div class="cb-cta">
+      <h2>"The right tool changes what is possible."</h2>
+      <p>Discuss your production requirements with our technical team.</p>
+      <a href="#" class="cb-cta-btn">Send an Enquiry</a>
+    </div>
+  </div>
+
+  <div class="design-notes">
+    <div class="dn-col">
+      <div class="dn-label">Palette</div>
+      <div class="palette-row"><div class="chip" style="background:#F2EFE7;border:1px solid #ddd"></div><span class="chip-hex">#F2EFE7 paper</span></div>
+      <div class="palette-row"><div class="chip" style="background:#1C1826"></div><span class="chip-hex">#1C1826 ink</span></div>
+      <div class="palette-row"><div class="chip" style="background:#C8000A"></div><span class="chip-hex">#C8000A reg.red</span></div>
+      <div class="palette-row"><div class="chip" style="background:#2D4B8E"></div><span class="chip-hex">#2D4B8E blueprint</span></div>
+    </div>
+    <div class="dn-col">
+      <div class="dn-label">Typography</div>
+      <div class="type-display" style="font-family:Georgia,serif;font-style:italic;font-weight:700;color:#1C1826">Precision starts before the <em style="color:#C8000A">print.</em></div>
+      <div class="type-body">Georgia serif (italic display) + system-ui body<br>Monospace for references and labels</div>
+    </div>
+    <div class="dn-col">
+      <div class="dn-label">The concept + the risk</div>
+      <ul class="dn-list">
+        <li><strong>Paper-tone background</strong> — evokes the packaging designer's studio, not a generic tech site</li>
+        <li><strong>Serif display type</strong> — the aesthetic risk: italic Georgia for headlines in a B2B tech context. Justified: this audience works with precision instruments, not software start-ups</li>
+        <li><strong>Die-cut dashes + registration marks</strong> — the visual language of the client's own world (packaging CAD, die-making)</li>
+        <li>Distinctive and defensible — nothing else in this sector looks like it</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ──────────────────────────── CONCEPT C ──────────────── -->
+<div class="concept-panel" id="panel-c">
+  <div class="browser">
+    <div class="browser-dots"><span></span><span></span><span></span></div>
+    <div class="browser-bar">emergeind.com</div>
+  </div>
+  <div class="site-preview">
+    <nav class="cc-nav">
+      <span class="cc-logo"><img class="opt-mark" src="../assets/images/Logo-mark.png" alt="">EMERGING GRAPHICS</span>
+      <ul class="cc-links">
+        <li><a href="#">HOME</a></li><li><a href="#">ABOUT</a></li>
+        <li><a href="#">PRODUCTS</a></li>
+        <li><a href="#" class="cc-cta-lnk">CONTACT</a></li>
+      </ul>
+    </nav>
+    <div class="cc-hero">
+      <div class="cc-hero-inner">
+        <div class="cc-eyebrow">Authorised distributor · India &amp; Middle East</div>
+        <h1 class="cc-h1">Industrial<br>precision.<br><em>Digital</em><br>workflow.</h1>
+        <p class="cc-sub">We put the world's most capable print and packaging technology into Indian manufacturing facilities — and keep it running.</p>
+        <div class="cc-btns">
+          <a href="#" class="cc-bp">OUR PRODUCTS →</a>
+          <a href="#" class="cc-bo">GET IN TOUCH</a>
+        </div>
+      </div>
+    </div>
+    <div class="cc-stats">
+      <div class="cc-stat"><div class="cc-num">30+</div><div class="cc-lbl">YEARS</div></div>
+      <div class="cc-stat"><div class="cc-num">500+</div><div class="cc-lbl">INSTALLATIONS</div></div>
+      <div class="cc-stat"><div class="cc-num">4</div><div class="cc-lbl">BRANDS</div></div>
+    </div>
+    <div class="cc-section">
+      <div class="cc-sec-label">WHAT WE DISTRIBUTE</div>
+      <div class="cc-sec-h2">OUR TECHNOLOGY RANGE</div>
+      <div class="cc-grid">
+        <div class="cc-card">
+          <div class="cc-card-icon">📐</div>
+          <div class="cc-card-title">ENGVIEW — CAD/CAM</div>
+          <p class="cc-card-desc">Structural design and visualisation for packaging. 1,500+ industry templates. The structural packaging design standard.</p>
+          <a href="#" class="cc-card-link">VIEW PRODUCT →</a>
+        </div>
+        <div class="cc-card">
+          <div class="cc-card-icon">✂️</div>
+          <div class="cc-card-title">IECHO — CUTTING SYSTEMS</div>
+          <p class="cc-card-desc">Nine digital cutting systems. Corrugated, carton, foam, flexible. Precision ±0.1 mm. Production speeds to 2,200 mm/s.</p>
+          <a href="#" class="cc-card-link">VIEW PRODUCT →</a>
+        </div>
+      </div>
+    </div>
+    <div class="cc-cta">
+      <h2>TALK TO OUR ENGINEERS</h2>
+      <p>We know this technology from the inside out. Let's solve your production challenge.</p>
+      <a href="#" class="cc-cta-btn">CONTACT US →</a>
+    </div>
+  </div>
+
+  <div class="design-notes">
+    <div class="dn-col">
+      <div class="dn-label">Palette</div>
+      <div class="palette-row"><div class="chip" style="background:#18160F"></div><span class="chip-hex">#18160F carbon</span></div>
+      <div class="palette-row"><div class="chip" style="background:#EDE9E0"></div><span class="chip-hex">#EDE9E0 warm white</span></div>
+      <div class="palette-row"><div class="chip" style="background:#E8740A"></div><span class="chip-hex">#E8740A machinery</span></div>
+      <div class="palette-row"><div class="chip" style="background:#3D8C68"></div><span class="chip-hex">#3D8C68 industrial ✦</span></div>
+    </div>
+    <div class="dn-col">
+      <div class="dn-label">Typography</div>
+      <div class="type-display" style="font-weight:800;text-transform:uppercase;letter-spacing:-0.01em;color:#0D0D12;font-size:1.1rem">INDUSTRIAL PRECISION.<br><span style="color:#E8740A">DIGITAL</span> WORKFLOW.</div>
+      <div class="type-body">system-ui 800w · uppercase · tight tracking<br>Immersive dark environment</div>
+    </div>
+    <div class="dn-col">
+      <div class="dn-label">The concept + the risk</div>
+      <ul class="dn-list">
+        <li><strong>Full dark mode</strong> — carbon ground evokes the factory floor; warm off-white text keeps it from feeling cold</li>
+        <li><strong>Industrial green as secondary accent</strong> — the risk: #3D8C68 alongside orange in a dark environment. Justification: green = machine-on status lights, operational readiness</li>
+        <li><strong>All-caps + glow radials</strong> — machinery-room aesthetic without clichéd gear icons</li>
+        <li>Strong visual identity, high contrast; technically complex to maintain</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ──────────────────────────── CONCEPT D ──────────────── -->
+<div class="concept-panel" id="panel-d">
+  <div class="browser">
+    <div class="browser-dots"><span></span><span></span><span></span></div>
+    <div class="browser-bar">emergeind.com</div>
+  </div>
+  <div class="site-preview">
+    <nav class="cd-nav">
+      <span class="cd-logo"><img class="opt-mark" src="../assets/images/Logo-mark-color.png" alt="">Emerging <span>Graphics</span></span>
+      <ul class="cd-links">
+        <li><a href="#">Home</a></li><li><a href="#">About</a></li>
+        <li><a href="#">Products</a></li>
+        <li><a href="#" class="cd-cta-lnk">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="cd-hero">
+      <div class="cd-hero-left">
+        <div class="cd-bignum">30<span class="cd-numsup">+</span></div>
+        <div class="cd-numlabel">years in print &amp; packaging technology</div>
+      </div>
+      <div class="cd-hero-right">
+        <div class="cd-eyebrow">Authorised distributor — India &amp; Middle East</div>
+        <h1 class="cd-h1">The technical partner India's packaging industry <strong>trusts.</strong></h1>
+        <div class="cd-rule"></div>
+        <p class="cd-sub">We distribute and support EngView, Purvar, IECHO and KingT — the tools that define precision in structural design, pre-press, digital cutting and corrugation printing.</p>
+        <div class="cd-btns">
+          <a href="#" class="cd-bp">Explore Products</a>
+          <a href="#" class="cd-bo">Get in touch</a>
+        </div>
+      </div>
+    </div>
+    <div class="cd-stats">
+      <div class="cd-stat"><div class="cd-num">500<em>+</em></div><div class="cd-lbl">Installations across India</div></div>
+      <div class="cd-stat"><div class="cd-num">4</div><div class="cd-lbl">Global technology brands</div></div>
+      <div class="cd-stat"><div class="cd-num">3</div><div class="cd-lbl">Countries served</div></div>
+    </div>
+    <div class="cd-section">
+      <div class="cd-sec-label">Products</div>
+      <div class="cd-sec-h2"><strong>Technology</strong> for packaging professionals</div>
+      <div class="cd-grid">
+        <div class="cd-card">
+          <div class="cd-card-icon">📐</div>
+          <div class="cd-card-title">EngView — CAD/CAM Software</div>
+          <p class="cd-card-desc">Structural packaging design, 3D visualisation and automated costing. 1,500+ die templates. Origin: Bulgaria.</p>
+          <a href="#" class="cd-card-link">View product →</a>
+        </div>
+        <div class="cd-card">
+          <div class="cd-card-icon">✂️</div>
+          <div class="cd-card-title">IECHO — Digital Cutting Systems</div>
+          <p class="cd-card-desc">Nine cutting system models. Corrugated, carton, foam and flexible. Precision to ±0.1 mm across all substrates.</p>
+          <a href="#" class="cd-card-link">View product →</a>
+        </div>
+      </div>
+    </div>
+    <div class="cd-cta">
+      <h2><strong>Let's talk</strong> about your production line.</h2>
+      <p>Our team has installed and supported these systems across India. We know what works.</p>
+      <a href="#" class="cd-cta-btn">Contact Us</a>
+    </div>
+  </div>
+
+  <div class="design-notes">
+    <div class="dn-col">
+      <div class="dn-label">Palette</div>
+      <div class="palette-row"><div class="chip" style="background:#FAFAFA;border:1px solid #ddd"></div><span class="chip-hex">#FAFAFA ground</span></div>
+      <div class="palette-row"><div class="chip" style="background:#0D0D12"></div><span class="chip-hex">#0D0D12 near-black</span></div>
+      <div class="palette-row"><div class="chip" style="background:#0047E1"></div><span class="chip-hex">#0047E1 electric blue</span></div>
+      <div class="palette-row"><div class="chip" style="background:#E8E8EE;border:1px solid #ddd"></div><span class="chip-hex">#E8E8EE border</span></div>
+    </div>
+    <div class="dn-col">
+      <div class="dn-label">Typography</div>
+      <div class="type-display" style="font-weight:300;letter-spacing:-0.03em;color:#0D0D12;font-size:1.3rem">The partner India's packaging industry <strong>trusts.</strong></div>
+      <div class="type-body">system-ui · 300w light display + 800w bold contrast<br>Weight contrast replaces colour to create hierarchy</div>
+    </div>
+    <div class="dn-col">
+      <div class="dn-label">The concept + the risk</div>
+      <ul class="dn-list">
+        <li><strong>Asymmetric split hero</strong> — the risk: blue column with "30+" as the only hero graphic. No image, no illustration. Confidence of the number doing all the work</li>
+        <li><strong>Ultra-light weight display</strong> — 300w for headlines, with 800w bold for one word per line. Creates a rhythm that draws the eye</li>
+        <li><strong>Electric blue as the only accent</strong> — used once in nav logo, once in hero strip, once in CTA. Every use feels deliberate</li>
+        <li>Most scalable for Phase 2 expansion; easier to maintain visual discipline</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+</div><!-- /p-body -->
+
+<script>
+function show(id){
+  document.querySelectorAll('.concept-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  document.getElementById('tab-'+id).classList.add('active');
+}
+</script>
+</body>
+</html>
+
