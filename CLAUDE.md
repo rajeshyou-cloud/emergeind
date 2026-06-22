@@ -2,6 +2,19 @@
 
 ---
 
+## Session Start — Read This First
+
+At the start of every session on this project, read **`PROJECT_STATE.md`** in this directory before doing anything else. It contains:
+- Infrastructure facts (FTP, Cloudflare, GoDaddy — two-server architecture)
+- GitHub repo and Vercel URLs
+- Current build state (which pages are done)
+- Pending tasks and blockers
+- Session log (what was done and when)
+
+After reading it, update the session log at the bottom of `PROJECT_STATE.md` when work is completed.
+
+---
+
 ## Active Skills — Always Apply
 
 These skills are **mandatory** for every task in this project. They are never optional.
