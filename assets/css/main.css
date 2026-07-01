@@ -159,7 +159,7 @@ section.dark p  { color: rgba(255,255,255,.6); }
 /* ── Page Hero (inner pages) ───────────────────────────── */
 .page-hero {
   background: var(--bg);
-  padding: 72px 0 52px;
+  padding: 36px 0 28px;
   text-align: center;
   border-bottom: 1px solid var(--border);
   position: relative;
