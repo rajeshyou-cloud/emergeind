@@ -1,10 +1,10 @@
 /* ── Top Strip ─────────────────────────────────────────── */
 .top-strip {
-  background: var(--bg-deep);
+  background: var(--surface);
   padding: 8px 0;
   font-size: .78rem;
-  color: rgba(255,255,255,.5);
-  border-bottom: 1px solid rgba(255,255,255,.08);
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
 }
 .top-strip .container {
   display: flex;
@@ -12,7 +12,7 @@
   align-items: center;
   gap: 24px;
 }
-.top-strip a { color: rgba(255,255,255,.6); }
+.top-strip a { color: var(--text); }
 .top-strip a:hover { color: var(--accent); }
 
 /* ── Main Nav ──────────────────────────────────────────── */
