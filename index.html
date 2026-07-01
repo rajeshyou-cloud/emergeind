@@ -31,13 +31,13 @@
       position: absolute; inset: 0;
       display: flex; align-items: center;
       opacity: 0; transition: opacity .7s ease;
-      background: var(--bg-deep);
+      background: var(--bg);
     }
     .slide.active { opacity: 1; z-index: 1; }
     .slide-bg {
       position: absolute; inset: 0;
       background-size: cover; background-position: center;
-      opacity: .14;
+      opacity: .06;
     }
     .slide-content {
       position: relative; z-index: 2;
@@ -45,21 +45,18 @@
     }
     .slide-tag {
       display: inline-block; padding: 6px 16px;
-      background: transparent; color: var(--accent);
-      border: 1px solid rgba(200,0,10,.5); border-radius: 0;
+      background: transparent; color: var(--secondary);
+      border: 1px solid rgba(45,75,142,.35); border-radius: 0;
       font-family: 'Courier New', Courier, monospace;
       font-size: .72rem; font-weight: 700; letter-spacing: .18em;
       text-transform: uppercase; margin-bottom: 24px;
     }
-    .slide-content h1 { color: var(--light); margin-bottom: 18px; max-width: 700px; }
-    .slide-content h1 em { color: var(--accent); font-style: italic; }
+    .slide-content h1 { color: var(--primary); margin-bottom: 18px; max-width: 700px; }
     .slide-content p  {
-      color: rgba(242,239,231,.6); font-size: 1.1rem;
+      color: var(--text); font-size: 1.1rem;
       max-width: 520px; margin-bottom: 32px;
     }
     .slide-actions { display: flex; gap: 14px; flex-wrap: wrap; }
-    .slide-actions .btn-outline { color: var(--light); border-color: rgba(242,239,231,.4); }
-    .slide-actions .btn-outline:hover { background: rgba(242,239,231,.12); color: white; }
 
     /* Slider controls */
     .slider-controls {
@@ -69,14 +66,14 @@
     }
     .slider-dot {
       width: 8px; height: 8px; border-radius: 50%;
-      background: rgba(255,255,255,.3); cursor: pointer;
+      background: rgba(28,24,38,.25); cursor: pointer;
       transition: background .2s, transform .2s; border: none;
     }
     .slider-dot.active { background: var(--accent); transform: scale(1.4); }
     .slider-arrow {
       position: absolute; top: 50%; transform: translateY(-50%);
-      z-index: 10; background: rgba(255,255,255,.08);
-      border: 1px solid rgba(255,255,255,.2); color: rgba(242,239,231,.8);
+      z-index: 10; background: rgba(28,24,38,.08);
+      border: 1px solid rgba(28,24,38,.2); color: var(--primary);
       width: 44px; height: 44px; border-radius: 0;
       cursor: pointer; font-size: 1.1rem; display: flex;
       align-items: center; justify-content: center;
