@@ -4,7 +4,7 @@
 **Vendor:** TechFirst Software Solutions
 **Live domain:** emergeind.com
 **Working dir:** `d:\EmergeInd\`
-**Last updated:** 2026-07-01 (Session 3)
+**Last updated:** 2026-07-01 (Session 4)
 
 ---
 
@@ -180,6 +180,40 @@ Theme selected by Ram Kumar. Nav is dark (`var(--bg-deep)`) for contrast. `theme
 - KGT-2500A printhead: "Epson I3200-A" → "Epson I3200-A1" — correct model suffix per kingtgroup.com
 - IECHO overview max cutting speed: "1,200 mm/s" → "1,800 mm/s" — BK4/BK4F/AK4 all achieve 1,800 mm/s per packnology.in spec tables
 - All other IECHO model specs (BK, BK3, BK4, PK, TK4S, MCT) verified correct against packnology.in — no changes needed
+
+### 2026-07-01 (Session 4 — Visual Quality & Nav Polish)
+
+**Product images — self-hosted from packnology.in CDN:**
+- All IECHO model images downloaded and self-hosted in `assets/images/products/` — zero external CDN dependencies remain
+- `iecho-pk-removebg.png` (transparent bg) obtained from packnology.in — used for PK model panel and IECHO hero slide so machine floats on dark/cream without a white box
+- KingT overview image also downloaded; KingT component images already self-hosted
+
+**IECHO model selector — `assets/css/product.css`:**
+- Image panel grid: `420px 1fr` → `1fr 1fr` (50/50) — image column grows from 420px to ~600px
+- Removed `max-height: 360px` cap — machines scale to full panel width
+- Padding reduced 24px → 0 (16px kept for breathing room); `min-height` 320 → 420px
+- Panel background: flat `bg-deep` → `radial-gradient` with navy centre for depth
+
+**Homepage hero — `index.html`:**
+- Split ratio: `55% 45%` → `42% 58%` — machine gets more than half the viewport
+- Right panel bg: dark `bg-deep` → `var(--bg)` cream for hardware slides (machine bg blends in, packnology.in style)
+- Software slides (EngView, Purvar) added `.dark` class — keep dark panel for ghost wordmark
+- Hero now has **5 slides**: EngView · Purvar · IECHO BK · IECHO PK · KingT
+  - EngView slide: ghost wordmark → `assets/images/hero/engview.png` (CAD workstation photo, `object-fit:cover`, zero padding)
+  - Purvar slide: ghost wordmark → `assets/images/hero/pasharp.png` (prepress ops photo, `object-fit:cover`, zero padding)
+  - IECHO BK slide: new slide added, `iecho-bk.png` on cream
+  - IECHO PK slide: `iecho-pk-removebg.png` (transparent bg) on cream
+  - KingT slide: `kingt-2500a.png` on cream — unchanged
+- Slider dots: 4 → 5; realigned from `left: 27.5%` → `left: 21%` (centre of 42% text panel)
+- Right arrow re-styled for cream bg (was light-on-dark from previous session)
+
+**Nav — `assets/css/nav.css`:**
+- Nav link font: `.82rem` → `.95rem` → `1.05rem`
+- Logo mark height: `40px` → `48px`
+- Wordmark ("Emerging Graphics") font: `1rem` → `1.2rem`
+- Nav bar height: `64px` → `70px` → `76px`
+- Top strip: dark `bg-deep` bg → `var(--surface)` white; text `rgba(255,255,255,.5)` → `var(--primary)` (near-black); link colour → `var(--secondary)` navy; `font-weight: 500` added for legibility
+- Location icon: `📍` emoji (renders inconsistently on Windows) → `⬥` solid diamond — updated across all 8 pages
 
 ### 2026-07-01 (Session 3 — UI Improvements)
 
