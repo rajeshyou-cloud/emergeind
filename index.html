@@ -18,30 +18,27 @@
   <link rel="stylesheet" href="assets/css/nav.css" />
   <link rel="stylesheet" href="assets/css/footer.css" />
   <style>
-    /* ── Hero Slider — Die Line theme ───────────────────────── */
-    .hero-slider { position: relative; height: 60vh; min-height: 420px; overflow: hidden; }
+    /* ── Hero Slider — Split Layout ───────────────────────── */
+    .hero-slider { position: relative; height: 70vh; min-height: 460px; overflow: hidden; }
     .hero-slider::before {
       content: ''; position: absolute;
       top: 16px; left: 16px; right: 16px; bottom: 16px;
-      border: 1.5px dashed rgba(200,0,10,.2);
+      border: 1.5px dashed rgba(200,0,10,.18);
       z-index: 20; pointer-events: none;
     }
     .slider-track { position: relative; width: 100%; height: 100%; }
     .slide {
       position: absolute; inset: 0;
-      display: flex; align-items: center;
+      display: grid; grid-template-columns: 55% 45%;
       opacity: 0; transition: opacity .7s ease;
       background: var(--bg);
     }
     .slide.active { opacity: 1; z-index: 1; }
-    .slide-bg {
-      position: absolute; inset: 0;
-      background-size: cover; background-position: center;
-      opacity: .06;
-    }
-    .slide-content {
-      position: relative; z-index: 2;
-      max-width: var(--container); margin: 0 auto; padding: 0 24px;
+
+    /* Left: text panel */
+    .slide-left {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 48px 56px;
     }
     .slide-tag {
       display: inline-block; padding: 6px 16px;
@@ -50,38 +47,94 @@
       font-family: 'Courier New', Courier, monospace;
       font-size: .72rem; font-weight: 700; letter-spacing: .18em;
       text-transform: uppercase; margin-bottom: 24px;
+      align-self: flex-start;
     }
-    .slide-content h1 { color: var(--primary); margin-bottom: 18px; max-width: 700px; }
-    .slide-content p  {
-      color: var(--text); font-size: 1.1rem;
-      max-width: 520px; margin-bottom: 32px;
-    }
+    .slide-left h1 { color: var(--primary); margin-bottom: 18px; max-width: 580px; }
+    .slide-left p  { color: var(--text); font-size: 1rem; max-width: 460px; margin-bottom: 32px; }
     .slide-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    /* Right: image / product panel */
+    .slide-right {
+      background: var(--bg-deep);
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden; position: relative;
+    }
+    .slide-right img {
+      width: 88%; max-height: 80%;
+      object-fit: contain;
+      animation: hero-tilt 8s ease-in-out infinite;
+      will-change: transform;
+      transform-origin: center center;
+    }
+    /* Ghost wordmark — background texture for software slides */
+    .slide-wordmark {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-family: Georgia, serif; font-style: italic;
+      font-size: clamp(5rem, 10vw, 9rem);
+      color: rgba(242,239,231,.05);
+      user-select: none; pointer-events: none;
+      white-space: nowrap; overflow: hidden;
+    }
+    /* Foreground content for software slides */
+    .slide-software-content {
+      position: relative; z-index: 1;
+      text-align: center; display: flex; flex-direction: column; align-items: center; gap: 14px;
+    }
+    .slide-software-name {
+      font-family: Georgia, serif; font-style: italic;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      color: rgba(242,239,231,.88);
+      letter-spacing: -0.01em; line-height: 1.1;
+    }
+    .slide-software-meta {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: .68rem; font-weight: 700;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: rgba(200,0,10,.85);
+      padding: 7px 16px;
+      border: 1px solid rgba(200,0,10,.3);
+    }
+    .slide-software-divider {
+      width: 36px; height: 1px;
+      background: rgba(242,239,231,.2);
+    }
+
+    @keyframes hero-tilt {
+      0%   { transform: perspective(800px) rotateY(-12deg) scale(1); }
+      50%  { transform: perspective(800px) rotateY(12deg) scale(1.02); }
+      100% { transform: perspective(800px) rotateY(-12deg) scale(1); }
+    }
+    @media (prefers-reduced-motion: reduce) { .slide-right img { animation: none; } }
 
     /* Slider controls */
     .slider-controls {
-      position: absolute; bottom: 36px; left: 50%;
+      position: absolute; bottom: 28px; left: 27.5%;
       transform: translateX(-50%); z-index: 10;
       display: flex; align-items: center; gap: 12px;
     }
     .slider-dot {
       width: 8px; height: 8px; border-radius: 50%;
-      background: rgba(28,24,38,.25); cursor: pointer;
+      background: rgba(28,24,38,.22); cursor: pointer;
       transition: background .2s, transform .2s; border: none;
     }
     .slider-dot.active { background: var(--accent); transform: scale(1.4); }
     .slider-arrow {
       position: absolute; top: 50%; transform: translateY(-50%);
-      z-index: 10; background: rgba(28,24,38,.08);
-      border: 1px solid rgba(28,24,38,.2); color: var(--primary);
-      width: 44px; height: 44px; border-radius: 0;
+      z-index: 10; width: 44px; height: 44px; border-radius: 0;
       cursor: pointer; font-size: 1.1rem; display: flex;
       align-items: center; justify-content: center;
       transition: background .2s, color .2s, border-color .2s;
     }
+    .slider-prev {
+      left: 24px; background: rgba(28,24,38,.07);
+      border: 1px solid rgba(28,24,38,.18); color: var(--primary);
+    }
+    .slider-next {
+      right: 24px; background: rgba(242,239,231,.1);
+      border: 1px solid rgba(242,239,231,.22); color: rgba(242,239,231,.8);
+    }
     .slider-arrow:hover { background: var(--accent); border-color: var(--accent); color: white; }
-    .slider-prev { left: 24px; }
-    .slider-next { right: 24px; }
 
     /* ── Who We Are ──────────────────────────────────────── */
     .who-we-are .container { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
@@ -115,8 +168,25 @@
       border-radius: 0;
     }
 
+    /* ── Partner name badges ─────────────────────────────── */
+    .partner-name {
+      font-family: Georgia, serif; font-style: italic;
+      font-size: 1.25rem; font-weight: 700;
+      color: var(--primary); opacity: .42;
+      letter-spacing: -0.01em;
+      padding: 14px 32px;
+      border: 1px solid rgba(28,24,38,.1);
+      transition: opacity .2s, border-color .2s;
+      cursor: default;
+    }
+    .partner-name:hover { opacity: .82; border-color: rgba(200,0,10,.35); }
+
     @media (max-width: 768px) {
-      .hero-slider { height: 52vh; min-height: 360px; }
+      .hero-slider { height: 54vh; min-height: 380px; }
+      .slide { grid-template-columns: 1fr; }
+      .slide-right { display: none; }
+      .slide-left { padding: 36px 24px; }
+      .slider-controls { left: 50%; }
       .who-we-are .container { grid-template-columns: 1fr; }
       .who-image { display: none; }
     }
@@ -187,54 +257,71 @@
     <div class="slider-track">
 
       <div class="slide active">
-        <div class="slide-bg" style="background-image:url('assets/images/hero/hero-engview.jpg')"></div>
-        <div class="slide-content">
+        <div class="slide-left">
           <div class="slide-tag">CAD/CAM Software</div>
           <h1>EngView — Packaging Design <em>Reimagined</em></h1>
-          <p>Parametric CAD/CAM software for structural packaging design — 3D visualisation, AR export and direct CNC output. Authorised for India and the Middle East.</p>
+          <p>Parametric CAD/CAM software for structural packaging design — 3D visualisation, AR export and direct CNC output. Over 1,500 parametric structures, ready to resize.</p>
           <div class="slide-actions">
             <a href="products/engview.html" class="btn btn-primary">Learn More</a>
             <a href="contact.html" class="btn btn-outline">Contact Us</a>
           </div>
         </div>
+        <div class="slide-right">
+          <span class="slide-wordmark">EngView</span>
+          <div class="slide-software-content">
+            <div class="slide-software-name">EngView</div>
+            <div class="slide-software-meta">1,500+ Parametric Designs</div>
+          </div>
+        </div>
       </div>
 
       <div class="slide">
-        <div class="slide-bg" style="background-image:url('assets/images/hero/hero-purvar.jpg')"></div>
-        <div class="slide-content">
+        <div class="slide-left">
           <div class="slide-tag">Pre-press Solutions</div>
           <h1>Purvar PaSharp &amp; <em>LineSharp</em></h1>
-          <p>Advanced pre-press software for precision plate making, colour separation and line art enhancement across all major printing workflows.</p>
+          <p>PaSharp for packaging prepress — trapping, Step &amp; Repeat, nesting and VDP. LineSharp for anti-counterfeiting security design: Guilloche patterns, microtext and engraving simulation.</p>
           <div class="slide-actions">
-            <a href="products/purvar-pasharp.html" class="btn btn-primary">Learn More</a>
-            <a href="contact.html" class="btn btn-outline">Contact Us</a>
+            <a href="products/purvar-pasharp.html" class="btn btn-primary">PaSharp</a>
+            <a href="products/purvar-linesharp.html" class="btn btn-outline">LineSharp</a>
+          </div>
+        </div>
+        <div class="slide-right">
+          <span class="slide-wordmark">Purvar</span>
+          <div class="slide-software-content">
+            <div class="slide-software-name">PaSharp</div>
+            <div class="slide-software-divider"></div>
+            <div class="slide-software-name">LineSharp</div>
           </div>
         </div>
       </div>
 
       <div class="slide">
-        <div class="slide-bg" style="background-image:url('assets/images/hero/hero-iecho.jpg')"></div>
-        <div class="slide-content">
+        <div class="slide-left">
           <div class="slide-tag">Digital Cutting</div>
           <h1>IECHO Digital <em>Cutting</em> Systems</h1>
-          <p>9 versatile models — BK, PK, TK and more — for precision cutting of corrugated board, foam, leather, textiles and composite materials.</p>
+          <p>9 versatile models — BK, PK, TK and more — for precision cutting of corrugated board, foam, leather, textiles and composite materials. Up to 1,800 mm/s.</p>
           <div class="slide-actions">
-            <a href="products/iecho.html" class="btn btn-primary">Explore Models</a>
+            <a href="products/iecho.html" class="btn btn-primary">Explore 9 Models</a>
             <a href="contact.html" class="btn btn-outline">Contact Us</a>
           </div>
+        </div>
+        <div class="slide-right">
+          <img src="https://cdnus.globalso.com/iechocutter/BK4-high-speed-digital-cutting-system.png" alt="IECHO BK4 Digital Cutting System" />
         </div>
       </div>
 
       <div class="slide">
-        <div class="slide-bg" style="background-image:url('assets/images/hero/hero-kingt.jpg')"></div>
-        <div class="slide-content">
+        <div class="slide-left">
           <div class="slide-tag">Digital Printing</div>
           <h1>KingT <em>Corrugation</em> Printers</h1>
-          <p>Image-grade inkjet printing directly on corrugated board — no plates, no pre-coating. KGT-2500A+ for wide-format production.</p>
+          <p>Image-grade inkjet printing directly on corrugated board — no plates, no pre-coating. KGT-1600H and KGT-2500A for single-pass and wide-format production.</p>
           <div class="slide-actions">
             <a href="products/kingt.html" class="btn btn-primary">See Models</a>
             <a href="contact.html" class="btn btn-outline">Contact Us</a>
           </div>
+        </div>
+        <div class="slide-right">
+          <img src="https://www.kingtgroup.com/data/upload/20231215/65e2a846a45fc_.png" alt="KingT KGT-2500A Digital Corrugated Printer" />
         </div>
       </div>
 
@@ -303,7 +390,7 @@
           <ul class="products-list">
             <li>EngView — Packaging CAD/CAM</li>
             <li>Purvar PaSharp — Pre-press</li>
-            <li>Purvar LineSharp — Line Art</li>
+            <li>Purvar LineSharp — Security Design</li>
           </ul>
           <a href="products/engview.html" class="btn btn-secondary" style="font-size:.85rem;padding:9px 20px">Explore Software</a>
         </div>
@@ -340,10 +427,10 @@
         <h2>Global Brands. Local Expertise.</h2>
       </div>
       <div class="partner-strip">
-        <img src="assets/images/partners/engview-Logo.svg" alt="EngView" onerror="this.outerHTML='<span style=\'font-weight:700;color:var(--text-muted);font-size:1.1rem\'>EngView</span>'" />
-        <img src="assets/images/partners/purvar-Logo.svg" alt="Purvar" onerror="this.outerHTML='<span style=\'font-weight:700;color:var(--text-muted);font-size:1.1rem\'>Purvar</span>'" />
-        <img src="assets/images/partners/iecho-Logo.svg" alt="IECHO" onerror="this.outerHTML='<span style=\'font-weight:700;color:var(--text-muted);font-size:1.1rem\'>IECHO</span>'" />
-        <img src="assets/images/partners/kingt-Logo.svg" alt="KingT" onerror="this.outerHTML='<span style=\'font-weight:700;color:var(--text-muted);font-size:1.1rem\'>KingT</span>'" />
+        <span class="partner-name">EngView</span>
+        <span class="partner-name">Purvar</span>
+        <span class="partner-name">IECHO</span>
+        <span class="partner-name">KingT</span>
       </div>
     </div>
   </section>
