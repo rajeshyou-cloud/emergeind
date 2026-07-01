@@ -106,10 +106,17 @@ Final theme pending Ram Kumar's selection from `emergeind-q3us.vercel.app`.
 
 - [ ] Apply chosen theme tokens across all 8 pages
 - [ ] Contact form backend (Formspree — confirm email with client)
-- [ ] `.htaccess` 301 redirects for old removed pages (Printers & Copiers, Swiss Cutting, Fluid Solutions, Self Adhesive Stocks)
-- [ ] Delete superseded `Logo*.svg` files before deploy
+- [ ] `.htaccess` 301 redirects for old removed pages — old URL pattern confirmed as `/product/<slug>/`; known slugs: `swiss-cutting-systems` ✅, `iecho` ✅; need to confirm: `printers-copiers`, `fluid-solutions`, `self-adhesive-stocks`
 - [ ] Full FTP upload of `d:\EmergeInd\` to npsolutions.in
 - [ ] Enable SSL in hosting panel after DNS switch
+
+## Completed — Pre-launch QA (2026-07-01)
+
+- [x] Cross-link audit — all 143 internal links verified across 8 pages ✅
+- [x] Mobile QA — breakpoints confirmed at 375/768/1200px ✅ (grids collapse, mega-menu goes to full-width mobile)
+- [x] Deleted superseded `Logo*.svg` files (Logo.svg, Logo-dark.svg, Logo-mark.svg, Logo-mark-color.svg) ✅
+- [x] SEO pass — canonical + OG tags added to all 8 pages; titles/descriptions/H1s already passed ✅
+- [x] Old WordPress URL pattern found via Google cache: `/product/<slug>/index.html` — use for .htaccess redirects
 
 ---
 
@@ -124,3 +131,11 @@ Final theme pending Ram Kumar's selection from `emergeind-q3us.vercel.app`.
 - Deployed themes-only to second Vercel project (`emergeind-q3us.vercel.app`)
 - Shared URL with Ram Kumar for design selection
 - Documented infrastructure (two-server architecture, Cloudflare DNS, FTP facts)
+
+### 2026-07-01
+- Cross-link audit: all 143 links clean across 8 pages
+- Mobile QA: CSS breakpoints verified — grids collapse at 768px, mega-menu at 900px, all safe at 375px
+- Deleted 4 superseded Logo*.svg files (~835KB removed)
+- SEO: added canonical + OG tags to all 8 pages (6 tags per page × 8 = 48 tags added)
+- Confirmed old WordPress URL pattern: `/product/<slug>/` — needed for .htaccess redirects
+- .htaccess draft: pending (need remaining old URL slugs from Ram / cPanel)
