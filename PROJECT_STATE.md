@@ -4,7 +4,7 @@
 **Vendor:** TechFirst Software Solutions
 **Live domain:** emergeind.com
 **Working dir:** `d:\EmergeInd\`
-**Last updated:** 2026-06-22
+**Last updated:** 2026-07-01
 
 ---
 
@@ -83,15 +83,15 @@ Uploading to Server B does NOT affect emergeind.com — the domain still points 
 | KingT | products/kingt.html | Complete |
 | IECHO | products/iecho.html | Complete |
 
-Active theme: **Concept C — Dark Substrate** (carbon dark, signal-orange CTAs, industrial-green eyebrows).
-Final theme pending Ram Kumar's selection from `emergeind-q3us.vercel.app`.
+Active theme: **Concept B — Die Line** (warm cream `#F2EFE7` bg, near-black `#1C1826`, crimson `#C8000A` CTAs, navy `#2D4B8E` links, Georgia serif headings, Courier New eyebrows, `border-radius: 0`).
+Theme selected by Ram Kumar. Nav is dark (`var(--bg-deep)`) for contrast. `themes/index.html` now redirects to `emergeind.vercel.app`.
 
 ---
 
 ## Pending — Waiting on Ram Kumar
 
-- [ ] **Design selection** from `emergeind-q3us.vercel.app` — 4 themes, pick one
-- [ ] **Cloudflare login** → change A record to `166.62.10.31` to make coming-soon live
+- [x] **Design selection** ✅ — Ram Kumar selected **Concept B "Die Line"**
+- [ ] **Cloudflare login** → change A record to `166.62.10.31` to make new site live
 - [ ] **cPanel / old FTP access** → back up old WordPress site to `d:\EmergeInd\docs\backup\`
 
 ## Pending — Client Assets
@@ -100,14 +100,16 @@ Final theme pending Ram Kumar's selection from `emergeind-q3us.vercel.app`.
 - [ ] Product photos (all 5 products)
 - [ ] Tushar Pande headshot
 - [ ] Partner logos (EngView, Purvar, IECHO, KingT — PNG transparent)
-- [ ] All 4 office addresses confirmed
+- [ ] All 4 office addresses confirmed (Navi Mumbai address in file: D370A, TTC MIDC, Jui Nagar 400705)
 
-## Pending — After Design Selection
+## Pending — Pre-Launch
 
-- [ ] Apply chosen theme tokens across all 8 pages
-- [ ] Contact form backend (Formspree — confirm email with client)
-- [ ] `.htaccess` 301 redirects for old removed pages — old URL pattern confirmed as `/product/<slug>/`; known slugs: `swiss-cutting-systems` ✅, `iecho` ✅; need to confirm: `printers-copiers`, `fluid-solutions`, `self-adhesive-stocks`
-- [ ] Full FTP upload of `d:\EmergeInd\` to npsolutions.in
+- [x] Apply chosen theme (Die Line) across all 8 pages ✅
+- [ ] Contact form backend — Formspree or mailto fallback (mailto currently in place as interim)
+- [ ] `.htaccess` 301 redirects for old removed pages — URL pattern `/product/<slug>/`; known slugs: `swiss-cutting-systems` ✅, `iecho` ✅; need to confirm: `printers-copiers`, `fluid-solutions`, `self-adhesive-stocks`
+- [ ] Favicon — use `Logo-mark-color.png` resized to 32×32
+- [ ] `robots.txt` + `sitemap.xml`
+- [ ] Full FTP upload of `d:\EmergeInd\` to npsolutions.in (after Cloudflare DNS switch)
 - [ ] Enable SSL in hosting panel after DNS switch
 
 ## Completed — Pre-launch QA (2026-07-01)
@@ -132,10 +134,47 @@ Final theme pending Ram Kumar's selection from `emergeind-q3us.vercel.app`.
 - Shared URL with Ram Kumar for design selection
 - Documented infrastructure (two-server architecture, Cloudflare DNS, FTP facts)
 
-### 2026-07-01
+### 2026-07-01 (Session 1 — QA & SEO)
 - Cross-link audit: all 143 links clean across 8 pages
 - Mobile QA: CSS breakpoints verified — grids collapse at 768px, mega-menu at 900px, all safe at 375px
 - Deleted 4 superseded Logo*.svg files (~835KB removed)
 - SEO: added canonical + OG tags to all 8 pages (6 tags per page × 8 = 48 tags added)
 - Confirmed old WordPress URL pattern: `/product/<slug>/` — needed for .htaccess redirects
 - .htaccess draft: pending (need remaining old URL slugs from Ram / cPanel)
+
+### 2026-07-01 (Session 2 — Theme, Content & Spec Sync)
+
+**Theme applied — Concept B "Die Line":**
+- Ram Kumar selected Concept B Die Line from `emergeind-q3us.vercel.app`
+- `themes/index.html` replaced with meta-refresh redirect to `emergeind.vercel.app`
+- Homepage inline `<style>` block rewritten — was hardcoded Concept C dark hex values, now uses CSS variables correctly
+- `assets/css/main.css`: Die Line design tokens, section padding reduced (72px→48px), page-hero padding reduced (72px→36px), eyebrow font-size .68→.74rem; added `h1 em, h2 em, h3 em { color: var(--accent); font-style: italic; }` rule
+- `assets/css/nav.css`: Nav darkened to `var(--bg-deep)` for contrast; nav link colors and hamburger updated for dark background
+- Hero slider: height reduced from 92vh to 60vh; all slides and controls updated for cream background
+- Crimson italic `<em>` accent added to H1s across all 8 pages
+
+**Homepage & inner page improvements:**
+- Hero slider height reduced (92vh → 60vh / 52vh mobile) — was covering full screen
+- Inner page hero padding reduced — was too much space above "OUR STORY" heading
+
+**KingT page — real content from kingtgroup.com:**
+- Full page rewrite: 2 model cards (KGT-1600H, KGT-2500A) with real spec tables
+- 6 component images hotlinked from kingtgroup.com CDN
+- KGT-2500A model image from kingtgroup.com CDN
+
+**IECHO page — real images from iechocutter.com:**
+- All 9 model panels already had full specs from prior session
+- Replaced 9 broken local image paths with live CDN URLs from `cdnus.globalso.com/iechocutter/`
+
+**Content sync — client document (`emergeind content(1).docx`):**
+- `about.html`: Replaced generic placeholder with client-provided text — Dubai HQ, 20+ professionals, Juinagar Navi Mumbai; strengths section rewritten to match client's 5-point list
+- `products/purvar-pasharp.html`: **Complete rewrite** — was incorrectly describing a CTP/plate-RIP system (Kodak/Agfa/dot gain/JDF). Correctly rewritten as packaging prepress software: trapping, Step & Repeat, intelligent nesting, mark generation, VDP, Adobe Illustrator support
+- `products/purvar-linesharp.html`: **Complete rewrite** — was incorrectly described as "AI line sharpening for print quality." Correctly rewritten as anti-counterfeiting security design system: Guilloche patterns, microtext, engraving simulation, brand protection
+- `products/engview.html`: Library count corrected "hundreds" → "over 1,500" (per client doc)
+- Nav mega-menu: LineSharp subtitle updated from "Line Art Enhancement" → "Security Design System" across all 6 pages carrying the nav
+
+**Spec corrections against reference websites (kingtgroup.com, packnology.in, iechocutter.com):**
+- KGT-1600H print speed: "Up to 80 m/min" → "30–75 m/min (varies by print pattern)" — manufacturer kingtgroup.com is definitive; 80 m/min was from client doc and overstated
+- KGT-2500A printhead: "Epson I3200-A" → "Epson I3200-A1" — correct model suffix per kingtgroup.com
+- IECHO overview max cutting speed: "1,200 mm/s" → "1,800 mm/s" — BK4/BK4F/AK4 all achieve 1,800 mm/s per packnology.in spec tables
+- All other IECHO model specs (BK, BK3, BK4, PK, TK4S, MCT) verified correct against packnology.in — no changes needed
