@@ -4,7 +4,7 @@
 **Vendor:** TechFirst Software Solutions
 **Live domain:** emergeind.com
 **Working dir:** `d:\EmergeInd\`
-**Last updated:** 2026-07-01
+**Last updated:** 2026-07-01 (Session 3)
 
 ---
 
@@ -105,6 +105,8 @@ Theme selected by Ram Kumar. Nav is dark (`var(--bg-deep)`) for contrast. `theme
 ## Pending — Pre-Launch
 
 - [x] Apply chosen theme (Die Line) across all 8 pages ✅
+- [x] IECHO model selector — dark image panel, 3D tilt animation, absolute-fill layout ✅
+- [x] Homepage hero — split layout with real product images ✅
 - [ ] Contact form backend — Formspree or mailto fallback (mailto currently in place as interim)
 - [ ] `.htaccess` 301 redirects for old removed pages — URL pattern `/product/<slug>/`; known slugs: `swiss-cutting-systems` ✅, `iecho` ✅; need to confirm: `printers-copiers`, `fluid-solutions`, `self-adhesive-stocks`
 - [ ] Favicon — use `Logo-mark-color.png` resized to 32×32
@@ -178,3 +180,30 @@ Theme selected by Ram Kumar. Nav is dark (`var(--bg-deep)`) for contrast. `theme
 - KGT-2500A printhead: "Epson I3200-A" → "Epson I3200-A1" — correct model suffix per kingtgroup.com
 - IECHO overview max cutting speed: "1,200 mm/s" → "1,800 mm/s" — BK4/BK4F/AK4 all achieve 1,800 mm/s per packnology.in spec tables
 - All other IECHO model specs (BK, BK3, BK4, PK, TK4S, MCT) verified correct against packnology.in — no changes needed
+
+### 2026-07-01 (Session 3 — UI Improvements)
+
+**IECHO model selector — `assets/css/product.css`:**
+- Image column width: 260px → 380px → 420px (iterative sizing)
+- Image panel background: `var(--bg)` (cream) → `var(--bg-deep)` (near-black) — machines pop on dark
+- Added `border-top: 3px solid var(--accent)` (crimson) to `.model-panel` — deliberate selected-state frame
+- Model h4 font-size: default → 1.35rem italic Georgia
+- Image layout: changed from `display:flex; max-height:300px` to `position:absolute; inset:20px` — image now fills 100% of panel height regardless of how tall the spec table is (solves PK/TK4S small-image problem)
+- Added `tilt3d` keyframe: `perspective(700px) rotateY(-14deg ↔ +14deg)` over 7s — pendulum 3D effect (not full 360° which would flatten 2D PNGs)
+- `prefers-reduced-motion` respected — animation disabled for accessibility
+- All 9 IECHO model images confirmed to be from `cdnus.globalso.com/iechocutter/` — same CDN as iechocutter.com (no better source exists)
+
+**Homepage hero — `index.html`:**
+- Layout redesign: was text-only on cream (hero images never provided by client) → split 55%/45% grid
+  - Left (55%): cream bg, tag + h1 + description + CTAs
+  - Right (45%): `var(--bg-deep)` dark panel
+- Hardware slides (IECHO slide 3, KingT slide 4): right panel shows actual machine image with `hero-tilt` animation (same pendulum as IECHO selector)
+  - IECHO: `cdnus.globalso.com/iechocutter/BK4-high-speed-digital-cutting-system.png`
+  - KingT: `kingtgroup.com/data/upload/20231215/65e2a846a45fc_.png` (KGT-2500A)
+- Software slides (EngView slide 1, Purvar slide 2): right panel shows ghost wordmark + Georgia italic product name(s) + stat/meta badge — no client images needed
+- Slider dots repositioned to center of left panel (`left: 27.5%`)
+- Right arrow styled for dark bg (`rgba(242,239,231,.1)` bg, light text)
+- Hero height: 60vh → 70vh
+- Slide 2 description corrected: was wrong ("plate making, colour separation, line art enhancement") → now correct ("PaSharp for trapping/Step & Repeat/VDP; LineSharp for anti-counterfeiting security design")
+- "Purvar LineSharp — Line Art" → "Purvar LineSharp — Security Design" in software category card
+- Partner logos: replaced 4 broken `<img>` tags (SVGs never provided) with `.partner-name` text badges — Georgia italic, border, hover effect — intentional rather than broken
