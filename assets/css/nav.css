@@ -172,6 +172,10 @@
 .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 /* ── Mobile Nav ────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .top-strip .container { flex-wrap: wrap; gap: 6px; justify-content: center; font-size: .75rem; }
+}
+
 @media (max-width: 900px) {
   .hamburger { display: flex; }
   .nav-links {

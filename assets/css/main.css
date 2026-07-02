@@ -311,6 +311,7 @@ section.dark p  { color: rgba(255,255,255,.6); }
   .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
   .stats-bar .container { gap: 32px; }
   .partner-strip { gap: 28px; }
+  .cta-band { padding: 40px 0; }
 }
 @media (max-width: 480px) {
   h1 { font-size: 1.75rem; }
